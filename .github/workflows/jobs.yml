@@ -25,7 +25,7 @@ jobs:
      os: [ubantu-latest,windows-latest,macOS-latest]
     runs-on: ${{matrix.os}}
     steps:
-     -ru: ./server.sh
+     -run: ./server.sh
    job3:
     needs: job2
     strategy:
