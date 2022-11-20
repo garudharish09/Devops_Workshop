@@ -47,6 +47,8 @@ on:
     with:
      target: gh-pages
      build_dir: ./build
+    env:
+     GITHUB_TOKEN: {{GITHUB_TOKEN}}
      
   stale:
    runs-on: ubuntu-latest
