@@ -1,0 +1,48 @@
+name: job-dependencies
+on:
+ push:
+  branches:['master']
+ pull_request:
+  branches:['master']
+ workflow_dispatch:
+jobs:
+ job1:
+  env:
+   JOB1_VARIABLE: "THIS IS VARIABLE FOR JOB1"
+  strategy:
+   matrix:
+    version: [10,12,14]
+    os: [ubantu-latest,windows-latest,macOS-latest]
+  runs-on: ${{matrix.os}}
+  steps: 
+   -run: echo $JOB1_VARIABLE
+  job2:
+   env:
+    JOB2_VARIABLE: "THIS IS VARIABLE FOR JOB2"
+   strategy:
+    matrix:
+     version: [10,12,14]
+     os: [ubantu-latest,windows-latest,macOS-latest]
+    runs-on: ${{matrix.os}}
+    steps:
+     -ru: ./server.sh
+   job3:
+    needs: job2
+    strategy:
+     matrix:
+      version: [10,12,14]
+      os: [ubantu-latest,windows-latest,macOS-latest]
+     runs-on: ${{matrix.os}}
+     steps:
+      - run: echo"JOB3 RUNS IF JOB2 IS SUCCESFULL"
+   job4:
+    if : always ()
+    needs: job2
+    strategy:
+     matrix:
+      version: [10,12,14]
+      os: [ubantu-latest,windows-latest,macOS-latest]
+     runs-on: ${{matrix.os}}
+     steps:
+      -run: echo"job4 run only if job2 runs"
+      
