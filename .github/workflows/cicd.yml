@@ -37,8 +37,8 @@ on:
    needs: Build
    runs-on: ubantu-latest
    steps:
-   -name: downloading artifacts
-    uses: action/download-artifacts@v3
+    -name: downloading artifacts
+     uses: action/download-artifacts@v3
    with:
     name: download
     path: ./build
