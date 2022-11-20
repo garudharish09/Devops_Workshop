@@ -13,7 +13,7 @@ on:
    
    steps:
     -name: cloning the project repo
-     uses: actions/checkout@v3
+     uses: action/checkout@v3
     
     -name: Install Node.js
      uses: action/setup-node@v3
